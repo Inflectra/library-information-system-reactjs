@@ -29,7 +29,7 @@ const Main = (props) => {
     meta={booksMeta}
     permission={props.permission}
     textTitle="The following books exist in the system:"
-    textAdd="(create new book)"
+    textAdd="create new book"
   />;
   const authorsPage = () => <DataPage
     data={props.authors}
@@ -43,7 +43,7 @@ const Main = (props) => {
     meta={authorsMeta}
     permission={props.permission}
     textTitle="The following authors exist in the system:"
-    textAdd="(create new author)"
+    textAdd="create new author"
   />;
   const homePage = () => <Home 
     authHandler={props.authHandler}

@@ -33,6 +33,14 @@ const users = [
         active: false, 
         permission: permissions.view
     },
+    {
+        id: 5, 
+        username: "admin", 
+        password: "admin", 
+        name: "administrator", 
+        active: true, 
+        permission: permissions.admin
+    }
 ];
 
 export default users;

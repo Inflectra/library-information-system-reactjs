@@ -3,7 +3,7 @@
  * DESCRIPTION: a view/edit table, bootstrap styled 
  */
 
- import React from 'react'
+import React from 'react'
 import Button from './Button.jsx'
 import Select from './Select.jsx'
 import permissions from '../data/permissions';
@@ -44,7 +44,7 @@ const Table = (props) => {
   // start with an array of rows to map through
   const rows = props.data.map((row, index) => {
     let dataCells = [],
-        editDisabled = props.editId && props.editId != row.id,
+        editDisabled = (props.editId && props.editId != row.id) ? true : false,
         editMode = props.editId && props.editId == row.id;
     
     // then loop over each key in the specific object
@@ -121,7 +121,7 @@ const Table = (props) => {
       );
     }
     return (
-      <tr key={index}>{dataCells}</tr>
+      <tr key={row.id}>{dataCells}</tr>
     )
   });
 

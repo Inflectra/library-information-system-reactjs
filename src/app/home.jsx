@@ -41,6 +41,7 @@ const Home = (props) => (
               id="username" 
               placeholder="Username" 
               onChange={nameChange}
+              onKeyPress={ (e) => e.key === 'Enter' ? props.authHandler(formData) : null }
               />
           </div>
           <div className="form-group">
@@ -51,6 +52,7 @@ const Home = (props) => (
               id="password" 
               placeholder="Password" 
               onChange={passwordChange}
+              onKeyPress={ (e) => e.key === 'Enter' ? props.authHandler(formData) : null }
               />
           </div>
           <div>

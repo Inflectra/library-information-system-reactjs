@@ -3,21 +3,27 @@
  * DESCRIPTION: a specific component for this app - a template for a data view/edit/entry page with a title, link to add a book, and a datatable 
  */
 
- import React from 'react'
+import React from 'react'
 import Table from './Table.jsx'
+
+import permissions from '../data/permissions'
 
 const DataPage = (props) => (
   <div className="row">
     <h3>
       {props.textTitle}&nbsp;
-        <small>
-          <a 
-            href="#" 
-            onClick={props.dataAdd}
-            >
-            {props.textAdd}
-          </a>
-        </small>
+        { (props.permission === permissions.edit || props.permission === permissions.admin ) ?
+          <small>
+            <a 
+              href="#" 
+              className="btn btn-default btn-sm"
+              onClick={props.dataAddStart}
+              >
+              {props.textAdd}
+            </a>
+          </small>
+          : null
+        }
       </h3>
     <br/>
 

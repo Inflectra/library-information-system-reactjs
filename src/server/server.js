@@ -4,7 +4,7 @@ var express = require("express"),
     path = require('path');
 
 var app = express(),
-    _pathClient = path.join(__dirname, '../client/public');
+    _pathClient = path.join(__dirname, '../../build/client/public');
 
 app.set('port', (process.env.PORT || 5000));
 

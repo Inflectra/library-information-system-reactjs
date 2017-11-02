@@ -29,7 +29,7 @@ export function Book(id, name, author, genre, dateAdded, outOfPrint, active) {
         author: 1, 
         genre: 1, 
         dateAdded: "1/1/2001", 
-        outOfPrint: false,
+        outOfPrint: "No",
         active: true
     }
 };
