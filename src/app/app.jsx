@@ -10,8 +10,9 @@ import Main from './main.jsx';
 // data
 import users from './data/users';
 import permissions from './data/permissions';
-import { books, Book } from './data/books';
-import { authors, Author } from './data/authors';
+import { books, booksMeta, Book } from './data/books';
+import { authors, authorsMeta, Author } from './data/authors';
+import genres from './data/genres';
 
 
 
@@ -39,15 +40,15 @@ class App extends React.Component {
       booksEditingId: 0,
       booksEditingIndex: null,
       booksBackup: books,
+      booksMeta: booksMeta,
 
       // authors data - when editing, store the ID and index in the author array of the in-edit item
       // backup is used to keep a snapshot before editing an item, so can easily revert if not saving changes
       authors: authors,
       authorsEditingId: 0,
       authorsEditingIndex: null,
-      authorsBackup: authors
+      authorsBackup: authors,
     };
-
 
 
     // bind all of the state management functions
@@ -227,10 +228,15 @@ class App extends React.Component {
     const newArray = JSON.parse(JSON.stringify(this.state.authorsBackup));
     this.setState({ authorsEditingId: 0, authorsEditingIndex: null, authors: this.state.authorsBackup });
   }
+
+  // additionally, on save of authors update booksMeta with correct authors data
   authorUpdate(id) {
+    let newBooksMeta = JSON.parse(JSON.stringify(this.state.booksMeta));
+    newBooksMeta.author.dropdown = this.state.authors;
     this.setState({
       authorsEditingId: 0, 
-      authorsEditingIndex: null
+      authorsEditingIndex: null,
+      booksMeta: newBooksMeta
     });
   }
   authorChange(prop, e) {
@@ -290,6 +296,7 @@ class App extends React.Component {
           bookChange={this.bookChange}
           bookUpdate={this.bookUpdate}
           bookAddStart={this.bookAddStart}
+          booksMeta={this.state.booksMeta}
 
           // for authors page
           authors={this.state.authors}
@@ -299,6 +306,7 @@ class App extends React.Component {
           authorChange={this.authorChange}
           authorUpdate={this.authorUpdate}
           authorAddStart={this.authorAddStart}
+          authorsMeta={authorsMeta}
           />
       </div>
     );

@@ -5,11 +5,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 // components
 import DataPage from './components/DataPage.jsx' 
 import Home from './home.jsx';
-import PrivateRoute from './components/PrivateRoute.jsx'
 
-// data
-import { authorsMeta } from './data/authors'
-import { booksMeta } from './data/books'
 
 // Main page has routes to show different 'pages'
 // To ensure authentication stops pages being acccessed when logged out, render function in some routes have a ternary operator checking for logged in status
@@ -42,7 +38,7 @@ const Main = (props) => {
               dataSetEdit={props.bookSetEdit}
               dataUpdate={props.bookUpdate}
               dataAddStart={props.bookAddStart}
-              meta={booksMeta}
+              meta={props.booksMeta}
               permission={props.permission}
               textTitle="The following books exist in the system:"
               textAdd="create new book"
@@ -68,7 +64,7 @@ const Main = (props) => {
               dataSetEdit={props.authorSetEdit}
               dataUpdate={props.authorUpdate}
               dataAddStart={props.authorAddStart}
-              meta={authorsMeta}
+              meta={props.authorsMeta}
               permission={props.permission}
               textTitle="The following authors exist in the system:"
               textAdd="create new author"
