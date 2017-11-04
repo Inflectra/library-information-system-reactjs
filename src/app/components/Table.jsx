@@ -67,29 +67,36 @@ let Table = (props) => {
         
         // if we are in edit mode - on this specific row
         } else {
+          // set validation classes to highlight input on error
+          const classes = `form-group ${props.errorProps.includes(prop) ? "has-error" : null}`
+
           // dropdowns are rendered as selects
           if (props.meta[prop].dropdown) {
             dataCells.push(
             <td key={prop}>
-              <Select 
-                name={props.meta[prop].name} 
-                options={props.meta[prop].dropdown} 
-                selected={row[prop]}
-                param={prop}
-                changeAction={props.editChange}
-                />
+              <div className={classes}>
+                <Select 
+                  name={props.meta[prop].name} 
+                  options={props.meta[prop].dropdown} 
+                  selected={row[prop]}
+                  param={prop}
+                  changeAction={props.editChange}
+                  />
+                </div>
               </td>
             )
           // otherwise render as inputs
           } else {
             dataCells.push(
               <td key={prop}>
-                <input 
-                  className="form-control" 
-                  value={row[prop]} 
-                  type="text" 
-                  onChange={props.editChange.bind(this, prop)}
-                  />
+                <div className={classes}>
+                  <input 
+                    className="form-control" 
+                    value={row[prop]} 
+                    type="text" 
+                    onChange={props.editChange.bind(this, prop)}
+                    />
+                </div>
               </td>
             )
           }

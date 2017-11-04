@@ -10,7 +10,7 @@
 
 export const authorsMeta = {
   id: { name: "ID", editable: false, visible: true },
-  name: { name: "Name", editable: true, visible: true },
+  name: { name: "Name", editable: true, visible: true, required: true },
   age: { name: "Age", editable: true, visible: true },
 };
     

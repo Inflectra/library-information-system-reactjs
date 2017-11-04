@@ -14,9 +14,9 @@ import genres from './genres'
 
 export const booksMeta = {
   id: { name: "ID", editable: false, visible: true },
-  name: { name: "Name", editable: true, visible: true },
-  author: { name: "Author", editable: true, visible: true, dropdown: authors },
-  genre: { name: "Genre", editable: true, visible: true, dropdown: genres },
+  name: { name: "Name", editable: true, visible: true, required: true },
+  author: { name: "Author", editable: true, visible: true, dropdown: authors, required: true },
+  genre: { name: "Genre", editable: true, visible: true, dropdown: genres, required: true },
   dateAdded: { name: "Date Added", editable: false, visible: true },
   outOfPrint: { name: "Out of Print", editable: false, visible: true },
   active: { name: "Active", editable: false, visible: false },

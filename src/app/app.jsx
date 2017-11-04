@@ -40,6 +40,7 @@ class App extends React.Component {
       booksEditingId: 0,
       booksEditingIndex: null,
       booksBackup: books,
+      booksErrorProps: [],
       booksMeta: JSON.parse(JSON.stringify(booksMeta)),
 
       // authors data - when editing, store the ID and index in the author array of the in-edit item
@@ -48,6 +49,7 @@ class App extends React.Component {
       authorsEditingId: 0,
       authorsEditingIndex: null,
       authorsBackup: authors,
+      authorsErrorProps: []
     };
 
 
@@ -151,18 +153,37 @@ class App extends React.Component {
   // @param: id - int from UI about the relevant entry
   bookCancelEdit(id) {
     const newArray = JSON.parse(JSON.stringify(this.state.booksBackup));
-    this.setState({ booksEditingId: 0, booksEditingIndex: null, books: this.state.booksBackup });
+    this.setState({ 
+      booksEditingId: 0, 
+      booksEditingIndex: null, 
+      books: this.state.booksBackup,
+      booksErrorProps: [],
+    });
   }
 
-  // when in edit mode, save changes back to main state
+  // when in edit mode, save changes back to main state - after checking that all required fields are filled in
+  // if required fields are blank set data to highlight to user
   // because state is being update on any change anyway, just need to turn off edit mode
   // no need to do anything with the backup - it will stay as pre edit, and will be updated on next edit, if any 
   // @param: id - int from UI about the relevant entry
   bookUpdate(id) {
-    this.setState({
-      booksEditingId: 0, 
-      booksEditingIndex: null
-    });
+    //check required fields are filled in
+    let errorProps = [];
+    for (const prop in this.state.booksMeta) {
+      if (this.state.books[this.state.booksEditingIndex][prop] == "" && this.state.booksMeta[prop].required) {
+        errorProps.push(prop);
+      }
+    }
+    const hasErrors = errorProps.length > 0;
+    if (!hasErrors) {
+      this.setState({
+        booksEditingId: 0, 
+        booksEditingIndex: null,
+        booksErrorProps: [],
+      });
+    } else {
+      this.setState({ booksErrorProps: errorProps});
+    }
   }
 
   // deleting a book is really a soft delete - set it's active key to false
@@ -226,18 +247,36 @@ class App extends React.Component {
   }
   authorCancelEdit(id) {
     const newArray = JSON.parse(JSON.stringify(this.state.authorsBackup));
-    this.setState({ authorsEditingId: 0, authorsEditingIndex: null, authors: this.state.authorsBackup });
+    this.setState({ 
+      authorsEditingId: 0, 
+      authorsEditingIndex: null, 
+      authors: this.state.authorsBackup,
+      authorsErrorProps: [],
+    });
   }
 
   // additionally, on save of authors update booksMeta with correct authors data
   authorUpdate(id) {
-    let newBooksMeta = JSON.parse(JSON.stringify(this.state.booksMeta));
-    newBooksMeta.author.dropdown = this.state.authors;
-    this.setState({
-      authorsEditingId: 0, 
-      authorsEditingIndex: null,
-      booksMeta: newBooksMeta
-    });
+    //check required fields are filled in
+    let errorProps = [];
+    for (const prop in authorsMeta) {
+      if (this.state.authors[this.state.authorsEditingIndex][prop] == "" && authorsMeta[prop].required) {
+        errorProps.push(prop);
+      }
+    }
+    const hasErrors = errorProps.length > 0;
+    if (!hasErrors) {
+      let newBooksMeta = JSON.parse(JSON.stringify(this.state.booksMeta));
+      newBooksMeta.author.dropdown = this.state.authors;
+      this.setState({
+        authorsEditingId: 0, 
+        authorsEditingIndex: null,
+        authorsErrorProps: [],
+        booksMeta: newBooksMeta
+      });
+    } else {
+      this.setState({ authorsErrorProps: errorProps});
+    }
   }
   authorChange(prop, e) {
     let newArray = JSON.parse(JSON.stringify(this.state.authors));
@@ -297,6 +336,7 @@ class App extends React.Component {
           bookUpdate={this.bookUpdate}
           bookAddStart={this.bookAddStart}
           booksMeta={this.state.booksMeta}
+          booksErrorProps={this.state.booksErrorProps}
 
           // for authors page
           authors={this.state.authors}
@@ -307,6 +347,7 @@ class App extends React.Component {
           authorUpdate={this.authorUpdate}
           authorAddStart={this.authorAddStart}
           authorsMeta={authorsMeta}
+          authorsErrorProps={this.state.authorsErrorProps}
           />
       </div>
     );

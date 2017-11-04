@@ -38,6 +38,7 @@ const Main = (props) => {
               dataSetEdit={props.bookSetEdit}
               dataUpdate={props.bookUpdate}
               dataAddStart={props.bookAddStart}
+              errorProps={props.booksErrorProps}
               meta={props.booksMeta}
               permission={props.permission}
               textTitle="The following books exist in the system:"
@@ -64,6 +65,7 @@ const Main = (props) => {
               dataSetEdit={props.authorSetEdit}
               dataUpdate={props.authorUpdate}
               dataAddStart={props.authorAddStart}
+              errorProps={props.authorsErrorProps}
               meta={props.authorsMeta}
               permission={props.permission}
               textTitle="The following authors exist in the system:"

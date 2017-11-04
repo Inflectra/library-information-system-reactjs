@@ -16,7 +16,7 @@ const DataPage = (props) => (
         { (props.permission === permissions.edit || props.permission === permissions.admin ) ?
           <small>
             <Button 
-              isDisabled={props.dataEditingId}
+              isDisabled={props.dataEditingId ? true : false}
               classes="btn btn-default btn-sm"
               onClick={props.dataAddStart}
               text={props.textAdd}
@@ -25,6 +25,10 @@ const DataPage = (props) => (
           : null
         }
       </h3>
+      { props.errorProps.length ?
+        <div className="alert alert-danger" role="alert">Please fill in all required fields</div>
+        : null
+      }
     <br/>
 
     <Table
@@ -37,6 +41,7 @@ const DataPage = (props) => (
       editSave={props.dataUpdate}
       meta={props.meta}
       permission={props.permission}
+      errorProps={props.errorProps}
     />
   </div>
 ) 
