@@ -69,6 +69,7 @@ class App extends React.Component {
     this.authorSetEdit = this.authorSetEdit.bind(this);
     this.authorUpdate = this.authorUpdate.bind(this);
     this.authorAddStart = this.authorAddStart.bind(this);
+
   }
 
 
@@ -177,7 +178,7 @@ class App extends React.Component {
   // @param: prop - string of the property being edited
   // @param: e - event from the DOM element
   bookChange(prop, e) {
-    const newArray = this.state.books;
+    let newArray = this.state.books;
     newArray[this.state.booksEditingIndex][prop] = e.target.value;
     this.setState({books: newArray});
   }
@@ -233,7 +234,7 @@ class App extends React.Component {
     });
   }
   authorChange(prop, e) {
-    const newArray = this.state.authors;
+    let newArray = JSON.parse(JSON.stringify(this.state.authors));
     newArray[this.state.authorsEditingIndex][prop] = e.target.value;
     this.setState({authors: newArray});
   }
@@ -251,7 +252,7 @@ class App extends React.Component {
       authors: newArray
     });
   }
-  
+
 
 
   /*

@@ -11,7 +11,7 @@ import permissions from '../data/permissions';
 // creates an editable table that can handle dropdowns
 // props contains meta information about the fields and then the array of entries themselves
 // lots of use of objects (as opposed to arrays) to match up the meta information to a specific entry
-const Table = (props) => { 
+let Table = (props) => { 
   // if permissions allow edits then this flog is used to render editing buttons
   const canEdit = props.permission === permissions.edit || props.permission === permissions.admin;
 
@@ -42,7 +42,7 @@ const Table = (props) => {
    * ====================
    */
   // start with an array of rows to map through
-  const rows = props.data.map((row, index) => {
+  let rows = props.data.map((row, index) => {
     let dataCells = [],
         editDisabled = (props.editId && props.editId != row.id) ? true : false,
         editMode = props.editId && props.editId == row.id;
@@ -121,7 +121,7 @@ const Table = (props) => {
       );
     }
     return (
-      <tr key={row.id}>{dataCells}</tr>
+      <tr key={index}>{dataCells}</tr>
     )
   });
 
