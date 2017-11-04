@@ -5,6 +5,7 @@
 
 import React from 'react'
 import Table from './Table.jsx'
+import Button from './Button.jsx'
 
 import permissions from '../data/permissions'
 
@@ -14,13 +15,12 @@ const DataPage = (props) => (
       {props.textTitle}&nbsp;
         { (props.permission === permissions.edit || props.permission === permissions.admin ) ?
           <small>
-            <a 
-              href="#" 
-              className="btn btn-default btn-sm"
+            <Button 
+              isDisabled={props.dataEditingId}
+              classes="btn btn-default btn-sm"
               onClick={props.dataAddStart}
-              >
-              {props.textAdd}
-            </a>
+              text={props.textAdd}
+              />
           </small>
           : null
         }

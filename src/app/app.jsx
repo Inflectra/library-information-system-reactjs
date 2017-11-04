@@ -40,7 +40,7 @@ class App extends React.Component {
       booksEditingId: 0,
       booksEditingIndex: null,
       booksBackup: books,
-      booksMeta: booksMeta,
+      booksMeta: JSON.parse(JSON.stringify(booksMeta)),
 
       // authors data - when editing, store the ID and index in the author array of the in-edit item
       // backup is used to keep a snapshot before editing an item, so can easily revert if not saving changes
