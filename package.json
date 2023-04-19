@@ -34,7 +34,7 @@
   "dependencies": {
     "babel-preset-stage-2": "^6.24.1",
     "express": "^4.15.2",
-    "firebase": "^4.0.0",
+    "firebase": "^4.13.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   }
